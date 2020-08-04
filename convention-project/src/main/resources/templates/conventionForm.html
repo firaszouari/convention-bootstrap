@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Convention Form</title>
+<link th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"
+	th:rel="stylesheet" />
+</head>
+<body>
+	<style>
+.div-wrapper {
+	height: 200px;
+	margin-top: 40px;
+	border: 2px dashed #ddd;
+	border-radius: 8px;
+}
+
+.div-to-align {
+	width: 75%;
+	padding: 40px 20px;
+}
+</style>
+	<div class="container h-100">
+		<div class="row h-100 justify-content-center align-items-center">
+			<div class="col-10 col-md-8 col-lg-6">
+				<form th:action="@{/addconvention}" 
+					th:object="${modifiedConvention}" method="post" class="form-example">
+					<h1>Convention :</h1>
+					<p class="description">Saisie les information necessaire pour
+						une convention .</p>
+						
+					<!-- <div class="form-group">
+						<label for="id">ID :</label> <input id="id" name="id"
+							class="form-control" th:field="*{id}"  placeholder="id" />
+					</div>-->
+					
+					<div class="form-group">
+						<label for="participant">Participant :</label> <select
+							id="participant" autofocus="autofocus" name="participant"
+							th:field="*{participant}" class="form-control" required>
+							<option
+								th:each="participant : ${T(com.project.convention.model.Convention.Participant).values()}"
+								th:value="${participant}" th:text="${participant}"></option>
+						</select> </select>
+					</div>
+					<div class="form-group">
+						<label for="type">Type :</label> <select name="type" id="type"
+							th:field="*{type}" class="form-control" required>
+							<option
+								th:each="type : ${T(com.project.convention.model.Convention.Type).values()}"
+								th:value="${type}" th:text="${type}"></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="date_edition">Date Edition :</label> <input type="date"
+							th:field="*{date_edition}" id="date_edition" name="date_edition"
+							min="1000-01-01" max="3000-12-31" placeholder="mm/dd/YYYY"
+							class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label for="date_signature">Date Signature :</label> <input
+							type="date" th:field="*{date_signature}" id="date_signature"
+							name="date_signature" min="1000-01-01" max="3000-12-31"
+							placeholder="mm/dd/YYYY" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label for="objet">Objet :</label> <input id="objet" name="objet"
+							class="form-control" th:field="*{objet}" placeholder="Objet" required />
+					</div>
+					<div class="form-group">
+						<label for="date_entre_vigueur">Date Entrer en Vigueur :</label> <input
+							type="date" th:field="*{date_entre_vigueur}"
+							id="date_entre_vigueur" name="date_entre_vigueur"
+							placeholder="mm/dd/YYYY" min="1000-01-01"
+							max="3000-12-31" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label for="date_expiration">Date Expiration :</label> <input
+							type="date" id="date_expiration" placeholder="mm/dd/YYYY"
+							th:field="*{date_expiration}" name="date_expiration"
+							max="3000-12-31" min="1000-01-01" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3">
+								<input class="btn btn-primary btn-customized form-control"
+									type="submit" value="Enregistrer" />
+							</div>
+						</div>
+					</div>
+					</form>
+			</div>
+		</div>
+	</div>
+	<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+</body>
+</html>
